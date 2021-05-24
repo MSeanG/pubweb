@@ -145,6 +145,18 @@ export const HomeStyles = styled.div`
       text-decoration:none;
     }
 
+    div.price-select > button.ascending::after {
+      content: 'High to Low ▼';
+      display: inline-block;
+      margin-left: 0.5rem;
+    }
+
+    div.price-select > button.descending::after {
+      content: 'Low to High ▲';
+      display: inline-block;
+      margin-left: 0.5rem;
+    }
+
     div.price-select > button > span {
       color: rgb(26, 115, 232)
     }

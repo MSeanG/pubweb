@@ -5,6 +5,40 @@ import { HomeStyles } from './Home.styled';
 import  listings  from '../data/listings';
 import companyLogo from '../image/logo.png';
 
+const useSortableData = (items, config = null) => {
+  const [sortConfig, setSortConfig] = React.useState(config);
+
+  const sortedItems = React.useMemo(() => {
+    let sortableItems = [...items];
+    if (sortConfig !== null) {
+      sortableItems.sort((a, b) => {
+        if (a[sortConfig.key] < b[sortConfig.key]) {
+          return sortConfig.direction === 'ascending' ? -1 : 1;
+        }
+        if (a[sortConfig.key] > b[sortConfig.key]) {
+          return sortConfig.direction === 'ascending' ? 1 : -1;
+        }
+        return 0;
+      });
+    }
+    return sortableItems;
+  }, [items, sortConfig]);
+
+  const requestSort = (key) => {
+    let direction = 'ascending';
+    if (
+      sortConfig &&
+      sortConfig.key === key &&
+      sortConfig.direction === 'ascending'
+    ) {
+      direction = 'descending';
+    }
+    setSortConfig({ key, direction });
+  };
+
+  return { items: sortedItems, requestSort, sortConfig };
+};
+
 const Home = () => {
 
   let loadMoreBtn = <React.Fragment><button onClick={() => setCount(prevCount => prevCount + 3)}>Load more</button></React.Fragment>,
@@ -12,15 +46,13 @@ const Home = () => {
   const
     [count, setCount] = useState(9),
     n = listings.length,
-    [price, setPrice] = useState(listed),
-
-    sortByPrice = () => {
-      console.log('sort');
-      const sorted = [...price].sort((a, b) => {
-        return a.startingPrice - b.startingPrice || a.homeName.localeCompare;
-      })
-      setPrice(sorted);
-    };
+    { items, requestSort, sortConfig } = useSortableData(listed),
+    getClassNamesFor = (name) => {
+      if (!sortConfig) {
+        return;
+      }
+      return sortConfig.key === name ? sortConfig.direction : undefined;
+    }
   ;
 
   if (count > n) {
@@ -40,27 +72,32 @@ const Home = () => {
       <div className="sort-bar">
         <div>{n} homes available</div>
         <div className="price-select">
-          Sort by: <button onClick={sortByPrice}>Price: High to Low <span>▼</span></button>
+          <span>Sort by: </span> 
+          <button
+            type="button" 
+            onClick={() => requestSort('startingPrice')}
+            className={getClassNamesFor('startingPrice')}
+          >
+            Price
+          </button>
         </div>
       </div>
 
       <ul className="listings">
-        {price.slice(0, count).map((data, key) => {
-          return (
-            <li key={key} className="listing">
-              <HomeListingCard 
-                key={key}
-                imageURL={data.imageURL}
-                homeName={data.homeName}
-                startingPrice={data.startingPrice}
-                beds={data.beds}
-                baths={data.baths}
-                sqft={data.sqft}
-                isMultiSection={data.isMultiSection}
-              />
-            </li>
-          );
-        })}
+        {items.slice(0, count).map((item, key) => (
+          <li key={key} className="listing">
+            <HomeListingCard 
+              key={key}
+              imageURL={item.imageURL}
+              homeName={item.homeName}
+              startingPrice={item.startingPrice}
+              beds={item.beds}
+              baths={item.baths}
+              sqft={item.sqft}
+              isMultiSection={item.isMultiSection}
+            />
+          </li>
+        ))}
       </ul>
 
       <div className="load-more">{loadMoreBtn}</div>
