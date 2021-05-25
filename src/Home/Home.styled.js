@@ -8,7 +8,8 @@ import styled from 'styled-components';
 // https://i2.wp.com/images.bstatic.de/wsTWodWAwMZbMRnK3VklbM98xw4=/1200x630/filters:focal(490x271:510x291)/files/import/2021-01/bild758390_1000x562.jpg?w=696&resize=696%2C&ssl=1
 
 export const HomeStyles = styled.div`
-  font-family: Arial, sans-serif;
+  @import url(https://fonts.google.com/specimen/Source+Sans+Pro?selection.family=Source+Sans+Pro);
+  font-family: 'Source Sans Pro', sans-serif;
   header {
     height: 108px;
     width: 100%;
