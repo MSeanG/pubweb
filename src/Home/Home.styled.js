@@ -146,13 +146,13 @@ export const HomeStyles = styled.div`
     }
 
     div.price-select > button.ascending::after {
-      content: 'High to Low ▼';
+      content: 'High - Low ▼';
       display: inline-block;
       margin-left: 0.5rem;
     }
 
     div.price-select > button.descending::after {
-      content: 'Low to High ▲';
+      content: 'Low - High ▲';
       display: inline-block;
       margin-left: 0.5rem;
     }
