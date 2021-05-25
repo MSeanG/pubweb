@@ -1,9 +1,5 @@
 # Pubweb Code Challenge
 
-### Demo Link
-
-- [Heroku](https://wdi11-online-menu.herokuapp.com/)
-
 ### Overview
 Create the Claytonhomes.com Home Listings page attached. Make sure this page displays properly on all viewport sizes, from mobile to a larger desktop. Designs have been provided for desktop (1440px) and mobile (375px) views. Make sure the page looks good on the tablet size as well. You may arrange the listing cards as you see fit.
 
