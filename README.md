@@ -16,8 +16,7 @@ On initial page load, a maximum of 9 listing cards should be shown on all viewpo
 Extra credit: Feel free to use your creativity to spice up the project in any way you see fit.
 
 ### Mock-Ups
-
-
+![clayton-homes-listing-page](https://user-images.githubusercontent.com/10038637/119424726-fcc7b580-bcd3-11eb-9926-da7f808c8af3.png)
 
 
 **WARNING: This is the documentation for `razzle@next` (Webpack 4).**  
